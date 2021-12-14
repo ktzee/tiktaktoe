@@ -6,56 +6,43 @@ enum XorO {
     Empty,
 }
 
+impl Default for XorO {
+    fn default() -> Self {
+        XorO::Empty
+    }
+}
+impl std::fmt::Display for XorO {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            XorO::X => write!(f, "X"),
+            XorO::O => write!(f, "O"),
+            XorO::Empty => write!(f, "."),
+        }
+    }
+}
+
+#[derive(Default)]
 struct GameState {
     board: [XorO; 9],
 }
 
 impl GameState {
-    pub fn new() -> GameState {
-        // TODO: Very ugly. There must be a better way to have default values
-        GameState {
-            board: [
-                XorO::Empty,
-                XorO::Empty,
-                XorO::Empty,
-                XorO::Empty,
-                XorO::Empty,
-                XorO::Empty,
-                XorO::Empty,
-                XorO::Empty,
-                XorO::Empty,
-            ],
-        }
-    }
+    //stub
 }
 
-fn print_cell(c: &XorO) -> String {
-    let text = match c {
-        XorO::X => String::from("X"),
-        XorO::O => String::from("O"),
-        XorO::Empty => String::from("."),
-    };
-    text
-}
 fn show_board(game: &GameState) {
     println!(" _______ ");
     println!(
         "| {} {} {} |",
-        print_cell(&game.board[0]),
-        print_cell(&game.board[1]),
-        print_cell(&game.board[2])
+        &game.board[0], &game.board[1], &game.board[2]
     );
     println!(
         "| {} {} {} |",
-        print_cell(&game.board[3]),
-        print_cell(&game.board[4]),
-        print_cell(&game.board[5])
+        &game.board[3], &game.board[4], &game.board[5]
     );
     println!(
         "| {} {} {} |",
-        print_cell(&game.board[6]),
-        print_cell(&game.board[7]),
-        print_cell(&game.board[8])
+        &game.board[6], &game.board[7], &game.board[8]
     );
     println!(" ------- ");
 }
@@ -79,7 +66,7 @@ fn player_input() {
 }
 
 fn main() {
-    let game = GameState::new();
+    let game = GameState::default();
 
     loop {
         show_board(&game);
